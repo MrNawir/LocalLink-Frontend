@@ -1,6 +1,7 @@
 import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import NavBar from './components/NavBar';
+import Footer from './components/Footer';
 import AdminLayout from './components/AdminLayout';
 import Home from './pages/Home';
 import Marketplace from './pages/Marketplace';
@@ -20,6 +21,9 @@ const Placeholder = ({ name }) => <div className="container" style={{ padding: '
  * Handles routing configuration and global layout.
  */
 function App() {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith('/admin');
+
   return (
     <div className="App">
       {/* Global Navigation Bar */}
@@ -66,6 +70,9 @@ function App() {
       >
         Admin
       </Link>
+
+      {/* Footer - Only show on public pages */}
+      {!isAdminRoute && <Footer />}
     </div >
   );
 }

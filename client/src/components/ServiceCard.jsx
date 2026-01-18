@@ -1,43 +1,55 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 
 /**
  * ServiceCard Component
- * Renders a summary card for a specific service.
- * Used in grid layouts on Home and Marketplace pages.
+ * Displays a single service's details in a reusable card format.
+ * @param {Object} service - The service object containing its details.
  */
 function ServiceCard({ service }) {
     // Destructure service properties for easier access
-    const { id, title, price, image_url, category, provider } = service;
+    const { id, title, price, image_url, category, provider, description } = service;
 
     return (
-        <div className="card flex flex-col justify-between">
-            <div>
-                {/* Service Image Container */}
-                <div style={{ height: '200px', borderRadius: 'var(--radius)', overflow: 'hidden', marginBottom: '1rem', background: '#f1f5f9' }}>
-                    <img src={image_url || 'https://via.placeholder.com/300'} alt={title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        <Link to={`/services/${id}`} className="block group">
+            <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                {/* Service Image */}
+                <div className="relative h-48 overflow-hidden">
+                    <img
+                        src={image_url || 'https://images.unsplash.com/photo-1581578731117-104f2a41bcbe?w=400'}
+                        alt={title}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <div className="absolute top-3 left-3">
+                        <Badge variant="secondary" className="bg-white/90 text-gray-800">
+                            {category?.name || 'Service'}
+                        </Badge>
+                    </div>
                 </div>
 
-                {/* Header: Category and Price */}
-                <div className="flex justify-between items-start">
-                    <span className="badge">{category?.name}</span>
-                    <span style={{ fontWeight: 'bold', color: 'var(--primary)' }}>${price}</span>
-                </div>
+                <CardHeader className="pb-2">
+                    <h3 className="font-semibold text-lg line-clamp-1">{title}</h3>
+                </CardHeader>
 
-                {/* Service Title */}
-                <h3 style={{ margin: '0.5rem 0' }}>{title}</h3>
+                <CardContent className="pb-2">
+                    <p className="text-muted-foreground text-sm line-clamp-2">
+                        {description?.substring(0, 100)}...
+                    </p>
+                </CardContent>
 
-                {/* Provider Attribution */}
-                <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
-                    by {provider?.username}
-                </p>
-            </div>
-
-            {/* Action Button: Link to Details Page */}
-            <Link to={`/services/${id}`} className="btn btn-primary" style={{ marginTop: '1rem', width: '100%' }}>
-                View Details
-            </Link>
-        </div>
+                <CardFooter className="flex justify-between items-center pt-2">
+                    <span className="text-xl font-bold text-primary">
+                        ${price?.toFixed(2)}
+                    </span>
+                    <Button variant="outline" size="sm">
+                        View Details
+                    </Button>
+                </CardFooter>
+            </Card>
+        </Link>
     );
 }
 
