@@ -152,9 +152,13 @@ function BookingForm() {
                                 />
                             </div>
 
-                            <Button type="submit" className="w-full" size="lg">
+                            <button 
+                                type="submit" 
+                                className="w-full h-11 px-8 rounded-md text-base font-medium"
+                                style={{ backgroundColor: '#2563eb', color: '#ffffff' }}
+                            >
                                 Confirm Booking
-                            </Button>
+                            </button>
                         </form>
                     </CardContent>
                 </Card>

@@ -60,12 +60,19 @@ function Home() {
                             Connect with expert professionals in your neighborhood for cleaning, repairs, gardening, IT support and more.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <Button size="lg" asChild>
-                                <Link to="/marketplace">Browse Services</Link>
-                            </Button>
-                            <Button size="lg" variant="outline" asChild>
-                                <Link to="/admin">Provider Dashboard</Link>
-                            </Button>
+                            <Link 
+                                to="/marketplace"
+                                className="inline-flex items-center justify-center h-11 px-8 rounded-md text-base font-medium transition-colors"
+                                style={{ backgroundColor: '#2563eb', color: '#ffffff' }}
+                            >
+                                Browse Services
+                            </Link>
+                            <Link 
+                                to="/admin"
+                                className="inline-flex items-center justify-center h-11 px-8 rounded-md text-base font-medium border border-gray-300 bg-white text-gray-900 hover:bg-gray-50 transition-colors"
+                            >
+                                Provider Dashboard
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -107,28 +114,31 @@ function Home() {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         {categories.length > 0 ? categories.map((cat) => (
-                            <Card
+                            <div
                                 key={cat.id}
-                                className="cursor-pointer group overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                                className="cursor-pointer group overflow-hidden rounded-xl border bg-card shadow transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
                                 onClick={() => handleCategoryClick(cat.name)}
                             >
-                                <div className="relative h-40 overflow-hidden">
+                                <div className="relative h-48 overflow-hidden">
                                     <img
                                         src={cat.image_url || 'https://images.unsplash.com/photo-1581578731117-104f2a41bcbe?w=400'}
                                         alt={cat.name}
                                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20" />
                                     <div className="absolute bottom-0 left-0 right-0 p-4">
-                                        <h3 className="text-white font-semibold text-lg drop-shadow-lg">
+                                        <h3 className="text-white font-bold text-xl drop-shadow-lg mb-3">
                                             {cat.name}
                                         </h3>
-                                        <span className="inline-block mt-2 px-3 py-1 bg-white text-gray-900 text-sm font-medium rounded-full shadow-lg hover:bg-blue-600 hover:text-white transition-colors">
+                                        <span 
+                                            className="inline-flex items-center justify-center px-4 py-2 rounded-md text-sm font-semibold shadow-md"
+                                            style={{ backgroundColor: '#ffffff', color: '#000000' }}
+                                        >
                                             View Services
                                         </span>
                                     </div>
                                 </div>
-                            </Card>
+                            </div>
                         )) : (
                             <div className="col-span-full text-center py-12">
                                 <div className="animate-pulse text-muted-foreground">Loading categories...</div>

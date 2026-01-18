@@ -41,9 +41,13 @@ function NavBar() {
                     >
                         Services
                     </NavLink>
-                    <Button asChild>
-                        <Link to="/marketplace">Book a Service</Link>
-                    </Button>
+                    <Link 
+                        to="/marketplace"
+                        className="inline-flex items-center justify-center h-9 px-4 rounded-md text-sm font-medium"
+                        style={{ backgroundColor: '#2563eb', color: '#ffffff' }}
+                    >
+                        Book a Service
+                    </Link>
                 </div>
             </div>
         </nav>

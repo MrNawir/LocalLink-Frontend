@@ -104,9 +104,13 @@ function ServiceDetail() {
                         </Card>
 
                         {/* Book Now Button */}
-                        <Button size="lg" className="w-full" asChild>
-                            <Link to={`/book/${service.id}`}>Book This Service</Link>
-                        </Button>
+                        <Link 
+                            to={`/book/${service.id}`}
+                            className="inline-flex items-center justify-center w-full h-11 px-8 rounded-md text-base font-medium"
+                            style={{ backgroundColor: '#2563eb', color: '#ffffff' }}
+                        >
+                            Book This Service
+                        </Link>
 
                         <p className="text-center text-sm text-muted-foreground">
                             Secure booking with LocalLink protection
