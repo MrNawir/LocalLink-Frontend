@@ -12,7 +12,12 @@ function NavBar() {
             <div className="container mx-auto flex h-16 items-center justify-between px-4">
                 {/* Brand Logo - Links to Homepage */}
                 <Link to="/" className="flex items-center space-x-2">
-                    <span className="text-2xl">🔗</span>
+                    <svg className="w-8 h-8 text-blue-600" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="16" cy="16" r="14" stroke="currentColor" strokeWidth="2"/>
+                        <circle cx="10" cy="14" r="3" fill="currentColor"/>
+                        <circle cx="22" cy="14" r="3" fill="currentColor"/>
+                        <path d="M10 14L16 20L22 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    </svg>
                     <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                         LocalLink
                     </span>

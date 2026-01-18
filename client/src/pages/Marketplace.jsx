@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import ServiceCard from '../components/ServiceCard';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -12,14 +12,17 @@ function Marketplace() {
     const [services, setServices] = useState([]);
     const [categories, setCategories] = useState([]);
     const location = useLocation();
-    const [selectedCategory, setSelectedCategory] = useState(location.state?.category || 'All');
+    const [searchParams] = useSearchParams();
+    const urlCategory = searchParams.get('category') || location.state?.category || 'All';
+    const [selectedCategory, setSelectedCategory] = useState(urlCategory);
     const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
-        if (location.state?.category) {
-            setSelectedCategory(location.state.category);
+        const category = searchParams.get('category') || location.state?.category;
+        if (category) {
+            setSelectedCategory(category);
         }
-    }, [location.state]);
+    }, [location.state, searchParams]);
 
     useEffect(() => {
         fetch('/services').then(r => r.json()).then(setServices);
@@ -83,7 +86,9 @@ function Marketplace() {
                 {/* Empty State */}
                 {filteredServices.length === 0 && (
                     <div className="text-center py-16">
-                        <div className="text-4xl mb-4">🔍</div>
+                        <svg className="w-16 h-16 mx-auto mb-4 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
                         <h3 className="text-lg font-semibold mb-2">No services found</h3>
                         <p className="text-muted-foreground">
                             Try adjusting your search or filter criteria

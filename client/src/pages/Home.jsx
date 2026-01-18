@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -7,9 +7,28 @@ import { Card, CardContent } from '@/components/ui/card';
  * Home Page Component
  * The landing page of the application using a Hero section and Popular Categories grid.
  */
+const buzzwords = [
+    'Plumber',
+    'Electrician', 
+    'Hairdresser',
+    'Cleaner',
+    'Gardener',
+    'IT Expert',
+    'Handyman',
+    'Tutor'
+];
+
 function Home() {
     const [categories, setCategories] = useState([]);
+    const [buzzwordIndex, setBuzzwordIndex] = useState(0);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setBuzzwordIndex((prev) => (prev + 1) % buzzwords.length);
+        }, 2000);
+        return () => clearInterval(interval);
+    }, []);
 
     useEffect(() => {
         fetch('/categories')
@@ -30,9 +49,11 @@ function Home() {
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="max-w-3xl mx-auto text-center">
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 mb-6">
-                            Find Trusted{' '}
-                            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                                Local Services
+                            Find Your Next{' '}
+                            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent inline-block min-w-[200px] md:min-w-[280px]">
+                                <span key={buzzwordIndex} className="animate-fade-in">
+                                    {buzzwords[buzzwordIndex]}
+                                </span>
                             </span>
                         </h1>
                         <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -97,10 +118,15 @@ function Home() {
                                         alt={cat.name}
                                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                                    <h3 className="absolute bottom-4 left-4 text-white font-semibold text-lg">
-                                        {cat.name}
-                                    </h3>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                                        <h3 className="text-white font-semibold text-lg drop-shadow-lg">
+                                            {cat.name}
+                                        </h3>
+                                        <span className="inline-block mt-2 px-3 py-1 bg-white text-gray-900 text-sm font-medium rounded-full shadow-lg hover:bg-blue-600 hover:text-white transition-colors">
+                                            View Services
+                                        </span>
+                                    </div>
                                 </div>
                             </Card>
                         )) : (
