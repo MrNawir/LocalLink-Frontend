@@ -3,33 +3,33 @@ import { Link } from 'react-router-dom';
 
 function Footer() {
     return (
-        <footer className="bg-slate-900 text-slate-300">
-            <div className="container mx-auto px-4 py-10">
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+        <footer style={{ backgroundColor: '#0f172a', color: '#cbd5e1', padding: '40px 0' }}>
+            <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 16px' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '24px' }}>
                     {/* Brand */}
-                    <div className="flex items-center space-x-2">
-                        <svg className="w-6 h-6 text-blue-500" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <svg style={{ width: '24px', height: '24px', color: '#3b82f6' }} viewBox="0 0 32 32" fill="none">
                             <circle cx="16" cy="16" r="14" stroke="currentColor" strokeWidth="2"/>
                             <circle cx="10" cy="14" r="3" fill="currentColor"/>
                             <circle cx="22" cy="14" r="3" fill="currentColor"/>
                             <path d="M10 14L16 20L22 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                         </svg>
-                        <span className="text-lg font-bold text-white">LocalLink</span>
+                        <span style={{ fontSize: '18px', fontWeight: 'bold', color: '#ffffff' }}>LocalLink</span>
                     </div>
 
                     {/* Links */}
-                    <div className="flex flex-wrap gap-6 text-sm">
-                        <Link to="/" className="hover:text-white transition-colors">Home</Link>
-                        <Link to="/marketplace" className="hover:text-white transition-colors">Services</Link>
-                        <Link to="/marketplace?category=Home Cleaning" className="hover:text-white transition-colors">Cleaning</Link>
-                        <Link to="/marketplace?category=IT Support" className="hover:text-white transition-colors">IT Support</Link>
-                        <Link to="/marketplace?category=Plumbing" className="hover:text-white transition-colors">Plumbing</Link>
-                        <Link to="/marketplace?category=Gardening" className="hover:text-white transition-colors">Gardening</Link>
-                        <Link to="/admin" className="hover:text-white transition-colors">Dashboard</Link>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '24px', fontSize: '14px' }}>
+                        <Link to="/" style={{ color: '#cbd5e1', textDecoration: 'none' }}>Home</Link>
+                        <Link to="/marketplace" style={{ color: '#cbd5e1', textDecoration: 'none' }}>Services</Link>
+                        <Link to="/marketplace?category=Home Cleaning" style={{ color: '#cbd5e1', textDecoration: 'none' }}>Cleaning</Link>
+                        <Link to="/marketplace?category=IT Support" style={{ color: '#cbd5e1', textDecoration: 'none' }}>IT Support</Link>
+                        <Link to="/marketplace?category=Plumbing" style={{ color: '#cbd5e1', textDecoration: 'none' }}>Plumbing</Link>
+                        <Link to="/marketplace?category=Gardening" style={{ color: '#cbd5e1', textDecoration: 'none' }}>Gardening</Link>
+                        <Link to="/admin" style={{ color: '#cbd5e1', textDecoration: 'none' }}>Dashboard</Link>
                     </div>
                 </div>
 
-                <div className="border-t border-slate-700 mt-8 pt-6 text-center text-sm text-slate-500">
+                <div style={{ borderTop: '1px solid #334155', marginTop: '32px', paddingTop: '24px', textAlign: 'center', fontSize: '14px', color: '#64748b' }}>
                     <p>&copy; 2026 LocalLink. All rights reserved. | Built with React & Flask</p>
                 </div>
             </div>
