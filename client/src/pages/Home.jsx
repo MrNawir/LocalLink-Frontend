@@ -59,19 +59,13 @@ function Home() {
                         <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
                             Connect with expert professionals in your neighborhood for cleaning, repairs, gardening, IT support and more.
                         </p>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                        <div className="flex justify-center">
                             <Link 
                                 to="/marketplace"
                                 className="inline-flex items-center justify-center h-11 px-8 rounded-md text-base font-medium transition-colors"
                                 style={{ backgroundColor: '#2563eb', color: '#ffffff' }}
                             >
                                 Browse Services
-                            </Link>
-                            <Link 
-                                to="/admin"
-                                className="inline-flex items-center justify-center h-11 px-8 rounded-md text-base font-medium border border-gray-300 bg-white text-gray-900 hover:bg-gray-50 transition-colors"
-                            >
-                                Provider Dashboard
                             </Link>
                         </div>
                     </div>

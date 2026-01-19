@@ -25,7 +25,6 @@ function Footer() {
                         <Link to="/marketplace?category=IT Support" style={{ color: '#cbd5e1', textDecoration: 'none' }}>IT Support</Link>
                         <Link to="/marketplace?category=Plumbing" style={{ color: '#cbd5e1', textDecoration: 'none' }}>Plumbing</Link>
                         <Link to="/marketplace?category=Gardening" style={{ color: '#cbd5e1', textDecoration: 'none' }}>Gardening</Link>
-                        <Link to="/admin" style={{ color: '#cbd5e1', textDecoration: 'none' }}>Dashboard</Link>
                     </div>
                 </div>
 

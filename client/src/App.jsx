@@ -47,30 +47,6 @@ function App() {
         </Route>
       </Routes>
 
-      {/* Floating Admin Button */}
-      {/* Positioned fixed at top-right for easy access during development/demo */}
-      <Link
-        to="/admin"
-        style={{
-          position: 'fixed',
-          top: '20px',
-          right: '20px',
-          opacity: 1,
-          fontSize: '0.8rem',
-          color: 'white',
-          background: '#64748b',
-          padding: '8px 12px',
-          borderRadius: '4px',
-          cursor: 'pointer',
-          zIndex: 9999,
-          boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
-          border: 'none',
-          textDecoration: 'none'
-        }}
-      >
-        Admin
-      </Link>
-
       {/* Footer - Only show on public pages */}
       {!isAdminRoute && <Footer />}
     </div >

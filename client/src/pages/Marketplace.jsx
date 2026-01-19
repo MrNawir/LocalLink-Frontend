@@ -36,47 +36,56 @@ function Marketplace() {
     });
 
     return (
-        <div className="min-h-screen bg-gray-50/50">
-            {/* Header */}
-            <div className="bg-white border-b">
-                <div className="container mx-auto px-4 py-8">
-                    <h1 className="text-3xl font-bold mb-2">Service Marketplace</h1>
-                    <p className="text-muted-foreground">
-                        Find and book trusted local service providers
+        <div className="min-h-screen bg-gray-50">
+            {/* Hero Header */}
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+                <div className="container mx-auto px-4 py-12">
+                    <h1 className="text-3xl md:text-4xl font-bold mb-3">Browse Services</h1>
+                    <p className="text-blue-100 text-lg max-w-2xl">
+                        Find trusted professionals for all your home and business needs
                     </p>
                 </div>
             </div>
 
-            {/* Filters */}
-            <div className="container mx-auto px-4 py-6">
-                <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                    <Input
-                        type="text"
-                        placeholder="Search services..."
-                        className="max-w-sm"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                    <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                        <SelectTrigger className="w-[200px]">
-                            <SelectValue placeholder="Category" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="All">All Categories</SelectItem>
-                            {categories.map(cat => (
-                                <SelectItem key={cat.id} value={cat.name}>{cat.name}</SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
+            {/* Search & Filter Bar */}
+            <div className="bg-white border-b shadow-sm sticky top-16 z-40">
+                <div className="container mx-auto px-4 py-4">
+                    <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
+                        <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                            <div className="relative">
+                                <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                                <Input
+                                    type="text"
+                                    placeholder="Search services..."
+                                    className="pl-10 w-full sm:w-80"
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                />
+                            </div>
+                            <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                                <SelectTrigger className="w-full sm:w-48">
+                                    <SelectValue placeholder="Category" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="All">All Categories</SelectItem>
+                                    {categories.map(cat => (
+                                        <SelectItem key={cat.id} value={cat.name}>{cat.name}</SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
+                        <p className="text-sm text-muted-foreground">
+                            {filteredServices.length} service{filteredServices.length !== 1 ? 's' : ''} found
+                            {selectedCategory !== 'All' && <span className="font-medium"> in {selectedCategory}</span>}
+                        </p>
+                    </div>
                 </div>
+            </div>
 
-                {/* Results count */}
-                <p className="text-sm text-muted-foreground mb-6">
-                    Showing {filteredServices.length} service{filteredServices.length !== 1 ? 's' : ''}
-                    {selectedCategory !== 'All' && ` in ${selectedCategory}`}
-                </p>
-
-                {/* Services Grid */}
+            {/* Services Grid */}
+            <div className="container mx-auto px-4 py-8">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {filteredServices.map(service => (
                         <ServiceCard key={service.id} service={service} />
