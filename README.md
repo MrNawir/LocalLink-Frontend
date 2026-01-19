@@ -139,6 +139,7 @@ server: {
 | `/admin` | AdminDashboard | **Admin Only** |
 | `/admin/services/new` | AdminServiceForm | **Admin Only** |
 | `/admin/categories/new` | AdminCategoryForm | **Admin Only** |
+| `/provider` | ProviderDashboard | **Provider Only** |
 
 ## Authentication Flow
 
