@@ -131,27 +131,25 @@ function Marketplace() {
             </div>
 
             {/* Category Pills */}
-            <div style={{ maxWidth: '1200px', margin: '-40px auto 0', padding: '0 24px', position: 'relative', zIndex: 10 }}>
+            <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '24px 24px 0' }}>
                 <div style={{ 
                     display: 'flex', 
-                    gap: '12px', 
-                    overflowX: 'auto', 
-                    paddingBottom: '16px',
-                    scrollbarWidth: 'none'
+                    flexWrap: 'wrap',
+                    gap: '10px',
+                    justifyContent: 'flex-start'
                 }}>
                     <button
                         onClick={() => setSelectedCategory('All')}
                         style={{
-                            padding: '12px 24px',
+                            padding: '10px 20px',
                             borderRadius: '50px',
-                            border: 'none',
+                            border: selectedCategory === 'All' ? 'none' : '1px solid #e5e7eb',
                             fontSize: '14px',
                             fontWeight: '500',
                             cursor: 'pointer',
                             whiteSpace: 'nowrap',
                             backgroundColor: selectedCategory === 'All' ? '#2563eb' : '#ffffff',
-                            color: selectedCategory === 'All' ? '#ffffff' : '#374151',
-                            boxShadow: '0 2px 8px rgba(0,0,0,0.08)'
+                            color: selectedCategory === 'All' ? '#ffffff' : '#374151'
                         }}
                     >
                         All Services
@@ -161,16 +159,15 @@ function Marketplace() {
                             key={cat.id}
                             onClick={() => setSelectedCategory(cat.name)}
                             style={{
-                                padding: '12px 24px',
+                                padding: '10px 20px',
                                 borderRadius: '50px',
-                                border: 'none',
+                                border: selectedCategory === cat.name ? 'none' : '1px solid #e5e7eb',
                                 fontSize: '14px',
                                 fontWeight: '500',
                                 cursor: 'pointer',
                                 whiteSpace: 'nowrap',
                                 backgroundColor: selectedCategory === cat.name ? '#2563eb' : '#ffffff',
-                                color: selectedCategory === cat.name ? '#ffffff' : '#374151',
-                                boxShadow: '0 2px 8px rgba(0,0,0,0.08)'
+                                color: selectedCategory === cat.name ? '#ffffff' : '#374151'
                             }}
                         >
                             {cat.name}

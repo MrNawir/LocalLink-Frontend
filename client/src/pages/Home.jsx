@@ -72,30 +72,6 @@ function Home() {
                 </div>
             </section>
 
-            {/* Stats Section */}
-            <section className="py-12 bg-white border-y">
-                <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                        <div>
-                            <div className="text-3xl font-bold text-primary">500+</div>
-                            <div className="text-muted-foreground">Service Providers</div>
-                        </div>
-                        <div>
-                            <div className="text-3xl font-bold text-primary">10k+</div>
-                            <div className="text-muted-foreground">Happy Customers</div>
-                        </div>
-                        <div>
-                            <div className="text-3xl font-bold text-primary">50+</div>
-                            <div className="text-muted-foreground">Service Types</div>
-                        </div>
-                        <div>
-                            <div className="text-3xl font-bold text-primary">4.9</div>
-                            <div className="text-muted-foreground">Average Rating</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             {/* Popular Categories Section */}
             <section className="py-16 lg:py-24">
                 <div className="container mx-auto px-4">
