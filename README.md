@@ -49,7 +49,7 @@ The live demo is hosted on a **Debian 13 (Trixie) VPS** with the following setup
 
 ## Features
 
-- **Modern UI** - Clean, Airbnb-inspired design with TailwindCSS
+- **Modern UI** - Clean design with TailwindCSS
 - **User Authentication** - JWT-based login/signup with role-based access
 - **Service Marketplace** - Browse, search, and filter local services
 - **Booking System** - Book services with authenticated users only
@@ -71,8 +71,6 @@ The live demo is hosted on a **Debian 13 (Trixie) VPS** with the following setup
 ---
 
 ## Quick Start (Local Development)
-
-> Complete setup in under 5 minutes.
 
 ### Prerequisites
 
