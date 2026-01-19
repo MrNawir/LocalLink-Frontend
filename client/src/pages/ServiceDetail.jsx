@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
+import { useAuth } from '../context/AuthContext';
 
 /**
  * ServiceDetail Page Component
@@ -12,6 +13,7 @@ import { Separator } from '@/components/ui/separator';
  */
 function ServiceDetail() {
     const { id } = useParams();
+    const { user } = useAuth();
     const [service, setService] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -104,13 +106,31 @@ function ServiceDetail() {
                         </Card>
 
                         {/* Book Now Button */}
-                        <Link 
-                            to={`/book/${service.id}`}
-                            className="inline-flex items-center justify-center w-full h-11 px-8 rounded-md text-base font-medium"
-                            style={{ backgroundColor: '#2563eb', color: '#ffffff' }}
-                        >
-                            Book This Service
-                        </Link>
+                        {user ? (
+                            <Link 
+                                to={`/book/${service.id}`}
+                                className="inline-flex items-center justify-center w-full h-11 px-8 rounded-md text-base font-medium"
+                                style={{ backgroundColor: '#2563eb', color: '#ffffff' }}
+                            >
+                                Book This Service
+                            </Link>
+                        ) : (
+                            <div className="space-y-3">
+                                <Link 
+                                    to={`/login?redirect=/book/${service.id}`}
+                                    className="inline-flex items-center justify-center w-full h-11 px-8 rounded-md text-base font-medium"
+                                    style={{ backgroundColor: '#2563eb', color: '#ffffff' }}
+                                >
+                                    Sign In to Book
+                                </Link>
+                                <p className="text-center text-sm text-muted-foreground">
+                                    Don't have an account?{' '}
+                                    <Link to={`/signup?redirect=/book/${service.id}`} className="text-primary hover:underline">
+                                        Sign up
+                                    </Link>
+                                </p>
+                            </div>
+                        )}
 
                         <p className="text-center text-sm text-muted-foreground">
                             Secure booking with LocalLink protection

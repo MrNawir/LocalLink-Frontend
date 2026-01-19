@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 function Signup() {
@@ -12,6 +12,10 @@ function Signup() {
     const [loading, setLoading] = useState(false);
     const { signup } = useAuth();
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+    
+    // Get redirect URL from query params
+    const redirectTo = searchParams.get('redirect') || null;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -31,7 +35,8 @@ function Signup() {
 
         try {
             await signup(username, email, password, role);
-            navigate('/dashboard');
+            // Redirect to intended destination or dashboard
+            navigate(redirectTo || '/dashboard');
         } catch (err) {
             setError(err.message);
         } finally {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 function Login() {
@@ -9,6 +9,11 @@ function Login() {
     const [loading, setLoading] = useState(false);
     const { login } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
+    const [searchParams] = useSearchParams();
+    
+    // Get redirect URL from query params or location state
+    const redirectTo = searchParams.get('redirect') || location.state?.from || null;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -17,7 +22,10 @@ function Login() {
 
         try {
             const user = await login(email, password);
-            if (user.role === 'admin') {
+            // Redirect to intended destination or default based on role
+            if (redirectTo) {
+                navigate(redirectTo);
+            } else if (user.role === 'admin') {
                 navigate('/admin');
             } else {
                 navigate('/dashboard');
