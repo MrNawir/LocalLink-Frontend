@@ -53,12 +53,12 @@ function NavBar() {
                     {isAuthenticated ? (
                         <>
                             <NavLink 
-                                to="/dashboard" 
+                                to={user?.role === 'provider' ? '/provider' : user?.role === 'admin' ? '/admin' : '/dashboard'} 
                                 className={({ isActive }) => 
                                     `text-sm font-medium transition-colors hover:text-primary ${isActive ? 'text-primary' : 'text-muted-foreground'}`
                                 }
                             >
-                                Dashboard
+                                {user?.role === 'provider' ? 'My Gigs' : 'Dashboard'}
                             </NavLink>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                                 <span style={{ fontSize: '14px', color: '#6b7280' }}>

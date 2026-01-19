@@ -27,6 +27,8 @@ function Login() {
                 navigate(redirectTo);
             } else if (user.role === 'admin') {
                 navigate('/admin');
+            } else if (user.role === 'provider') {
+                navigate('/provider');
             } else {
                 navigate('/dashboard');
             }
