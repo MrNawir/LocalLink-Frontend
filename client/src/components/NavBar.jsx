@@ -1,12 +1,20 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 /**
  * NavBar Component
  * Displays the localized application logo and primary navigation links.
  */
 function NavBar() {
+    const { user, isAuthenticated, isAdmin, logout } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate('/');
+    };
+
     return (
         <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="container mx-auto flex h-16 items-center justify-between px-4">
@@ -41,13 +49,68 @@ function NavBar() {
                     >
                         Services
                     </NavLink>
-                    <Link 
-                        to="/marketplace"
-                        className="inline-flex items-center justify-center h-9 px-4 rounded-md text-sm font-medium"
-                        style={{ backgroundColor: '#2563eb', color: '#ffffff' }}
-                    >
-                        Book a Service
-                    </Link>
+                    
+                    {isAuthenticated ? (
+                        <>
+                            <NavLink 
+                                to="/dashboard" 
+                                className={({ isActive }) => 
+                                    `text-sm font-medium transition-colors hover:text-primary ${isActive ? 'text-primary' : 'text-muted-foreground'}`
+                                }
+                            >
+                                Dashboard
+                            </NavLink>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                <span style={{ fontSize: '14px', color: '#6b7280' }}>
+                                    Hi, {user?.username}
+                                </span>
+                                <button
+                                    onClick={handleLogout}
+                                    style={{
+                                        padding: '8px 16px',
+                                        backgroundColor: '#ffffff',
+                                        color: '#374151',
+                                        border: '1px solid #d1d5db',
+                                        borderRadius: '6px',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        cursor: 'pointer'
+                                    }}
+                                >
+                                    Logout
+                                </button>
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <Link 
+                                to="/login"
+                                style={{
+                                    padding: '8px 16px',
+                                    color: '#374151',
+                                    fontSize: '14px',
+                                    fontWeight: '500',
+                                    textDecoration: 'none'
+                                }}
+                            >
+                                Login
+                            </Link>
+                            <Link 
+                                to="/signup"
+                                style={{
+                                    padding: '8px 16px',
+                                    backgroundColor: '#2563eb',
+                                    color: '#ffffff',
+                                    borderRadius: '6px',
+                                    fontSize: '14px',
+                                    fontWeight: '500',
+                                    textDecoration: 'none'
+                                }}
+                            >
+                                Sign Up
+                            </Link>
+                        </>
+                    )}
                 </div>
             </div>
         </nav>
