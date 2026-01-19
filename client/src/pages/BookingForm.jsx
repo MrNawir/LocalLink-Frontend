@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -16,8 +17,20 @@ import { Label } from '@/components/ui/label';
 function BookingForm() {
     const { id } = useParams();
     const navigate = useNavigate();
+    const { user, token } = useAuth();
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(false);
+
+    // Redirect to login if not authenticated
+    useEffect(() => {
+        if (!user) {
+            navigate('/login', { state: { from: `/book/${id}` } });
+        }
+    }, [user, navigate, id]);
+
+    if (!user) {
+        return null;
+    }
 
     const formik = useFormik({
         initialValues: {
@@ -38,10 +51,13 @@ function BookingForm() {
         onSubmit: (values) => {
             fetch('/bookings', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify({
                     service_id: id,
-                    client_id: 6,
+                    client_id: user.id,
                     date: values.date,
                     contact_phone: values.contact_phone,
                     location: values.location,
