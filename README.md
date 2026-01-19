@@ -7,7 +7,7 @@
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3-cyan?style=flat-square)](https://tailwindcss.com)
 [![License](https://img.shields.io/badge/License-MIT-purple?style=flat-square)](LICENSE)
 
-## 🔗 Related Repositories
+## Related Repositories
 
 | Repository | Description |
 |------------|-------------|
@@ -17,6 +17,15 @@
 ## Live Demo
 
 **[View Live App](https://locallink.dpdns.org)**
+
+### Deployment Details
+
+The live demo is hosted on a **Debian 13 (Trixie) VPS** with the following setup:
+
+- **Web Server**: Nginx (reverse proxy)
+- **Process Manager**: systemd services for backend and frontend
+- **Domain**: Free subdomain from [digitalplat.org](https://domain.digitalplat.org)
+- **CDN/Security**: Cloudflare proxy for SSL and DDoS protection
 
 ---
 
@@ -61,9 +70,9 @@
 
 ---
 
-## 🚀 Quick Start for Examiners
+## Quick Start (Local Development)
 
-> **Complete setup in under 5 minutes!**
+> Complete setup in under 5 minutes.
 
 ### Prerequisites
 
@@ -119,7 +128,7 @@ npm run dev
 
 ---
 
-## 🔐 Test Accounts
+## Test Accounts
 
 | Role | Email | Password | What to Test |
 |------|-------|----------|--------------|
@@ -129,7 +138,7 @@ npm run dev
 
 ---
 
-## 📱 User Flows to Test
+## User Flows to Test
 
 ### Client Flow
 1. Browse services on `/marketplace`
