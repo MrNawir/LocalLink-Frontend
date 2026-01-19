@@ -1,82 +1,133 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 
 /**
  * Home Page Component
  * The landing page of the application using a Hero section and Popular Categories grid.
  */
-function Home() {
-    // State to hold the list of categories fetched from the API
-    const [categories, setCategories] = useState([]);
+const buzzwords = [
+    'Plumber',
+    'Electrician', 
+    'Hairdresser',
+    'Cleaner',
+    'Gardener',
+    'IT Expert',
+    'Handyman',
+    'Tutor'
+];
 
-    // Navigation hook for programmatic redirection
+function Home() {
+    const [categories, setCategories] = useState([]);
+    const [buzzwordIndex, setBuzzwordIndex] = useState(0);
     const navigate = useNavigate();
 
-    // Fetch categories on component mount
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setBuzzwordIndex((prev) => (prev + 1) % buzzwords.length);
+        }, 2000);
+        return () => clearInterval(interval);
+    }, []);
+
     useEffect(() => {
         fetch('/categories')
             .then(r => r.json())
             .then(setCategories)
-            .catch(console.error); // Log errors if fetch fails
+            .catch(console.error);
     }, []);
 
-    /**
-     * Handles clicking on a category card.
-     * Navigates to the marketplace with the selected category pre-filtered.
-     * @param {string} categoryName - The name of the category to filter by
-     */
     const handleCategoryClick = (categoryName) => {
         navigate('/marketplace', { state: { category: categoryName } });
     };
 
     return (
-        <div className="home">
-            {/* Hero Section: Main welcome banner */}
-            <header className="hero container">
-                <h1>
-                    Find Trusted <span style={{ color: 'var(--primary)' }}>Local Services</span>
-                </h1>
-                <p>
-                    Connect with expert professionals in your neighborhood for cleaning, repairs, gardening, and more.
-                </p>
-
-                {/* Call to Action Button */}
-                <div className="flex justify-center gap-4">
-                    <Link to="/marketplace" className="btn btn-primary">Browse Services</Link>
+        <div className="min-h-screen">
+            {/* Hero Section */}
+            <section className="relative py-20 lg:py-32 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50" />
+                <div className="container mx-auto px-4 relative z-10">
+                    <div className="max-w-3xl mx-auto text-center">
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 mb-6">
+                            Find Your Next{' '}
+                            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent inline-block min-w-[200px] md:min-w-[280px]">
+                                <span key={buzzwordIndex} className="animate-fade-in">
+                                    {buzzwords[buzzwordIndex]}
+                                </span>
+                            </span>
+                        </h1>
+                        <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+                            Connect with expert professionals in your neighborhood for cleaning, repairs, gardening, IT support and more.
+                        </p>
+                        <div className="flex justify-center">
+                            <Link 
+                                to="/marketplace"
+                                className="inline-flex items-center justify-center h-11 px-8 rounded-md text-base font-medium transition-colors"
+                                style={{ backgroundColor: '#2563eb', color: '#ffffff' }}
+                            >
+                                Browse Services
+                            </Link>
+                        </div>
+                    </div>
                 </div>
-            </header>
+            </section>
 
             {/* Popular Categories Section */}
-            <section id="categories-section" className="container" style={{ padding: '4rem 1rem' }}>
-                <h2 style={{ textAlign: 'center', marginBottom: '3rem' }}>Popular Categories</h2>
+            <section className="py-16 lg:py-24">
+                <div className="container mx-auto px-4">
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl font-bold mb-4">Popular Categories</h2>
+                        <p className="text-muted-foreground max-w-2xl mx-auto">
+                            Explore our most requested service categories and find the help you need today.
+                        </p>
+                    </div>
 
-                {/* Grid Layout for Categories */}
-                <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
-                    {categories.length > 0 ? categories.map((cat) => (
-                        <div
-                            key={cat.id}
-                            className="card"
-                            style={{ textAlign: 'center', cursor: 'pointer' }}
-                            onClick={() => handleCategoryClick(cat.name)}
-                        >
-                            {/* Category Image */}
-                            <div style={{
-                                height: '150px',
-                                background: '#e2e8f0',
-                                borderRadius: 'var(--radius)',
-                                marginBottom: '1rem',
-                                overflow: 'hidden'
-                            }}>
-                                <img
-                                    src={cat.image_url || 'https://via.placeholder.com/400x300'}
-                                    alt={cat.name}
-                                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                />
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {categories.length > 0 ? categories.map((cat) => (
+                            <div
+                                key={cat.id}
+                                className="cursor-pointer group overflow-hidden rounded-xl border bg-card shadow transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                                onClick={() => handleCategoryClick(cat.name)}
+                            >
+                                <div className="relative h-48 overflow-hidden">
+                                    <img
+                                        src={cat.image_url || 'https://images.unsplash.com/photo-1581578731117-104f2a41bcbe?w=400'}
+                                        alt={cat.name}
+                                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20" />
+                                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                                        <h3 className="text-white font-bold text-xl drop-shadow-lg mb-3">
+                                            {cat.name}
+                                        </h3>
+                                        <span 
+                                            className="inline-flex items-center justify-center px-4 py-2 rounded-md text-sm font-semibold shadow-md"
+                                            style={{ backgroundColor: '#ffffff', color: '#000000' }}
+                                        >
+                                            View Services
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                            {/* Category Name */}
-                            <h3>{cat.name}</h3>
-                        </div>
-                    )) : <p style={{ textAlign: 'center', width: '100%' }}>Loading categories...</p>}
+                        )) : (
+                            <div className="col-span-full text-center py-12">
+                                <div className="animate-pulse text-muted-foreground">Loading categories...</div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </section>
+
+            {/* CTA Section */}
+            <section className="py-16 bg-gradient-to-r from-blue-600 to-indigo-600">
+                <div className="container mx-auto px-4 text-center">
+                    <h2 className="text-3xl font-bold text-white mb-4">Ready to get started?</h2>
+                    <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
+                        Join thousands of satisfied customers who have found reliable local service providers through LocalLink.
+                    </p>
+                    <Button size="lg" variant="secondary" asChild>
+                        <Link to="/marketplace">Find a Service Now</Link>
+                    </Button>
                 </div>
             </section>
         </div>
