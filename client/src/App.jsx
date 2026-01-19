@@ -11,6 +11,7 @@ import BookingForm from './pages/BookingForm';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
+import ProviderDashboard from './pages/ProviderDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminCategoryForm from './pages/AdminCategoryForm';
 import AdminServiceForm from './pages/AdminServiceForm';
@@ -64,6 +65,13 @@ function AppContent() {
         <Route path="/dashboard" element={
           <ProtectedRoute>
             <Dashboard />
+          </ProtectedRoute>
+        } />
+        
+        {/* Provider Dashboard */}
+        <Route path="/provider" element={
+          <ProtectedRoute>
+            <ProviderDashboard />
           </ProtectedRoute>
         } />
 
