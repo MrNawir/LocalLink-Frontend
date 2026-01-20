@@ -32,7 +32,7 @@ function AdminDashboard() {
      */
     const handleDeleteCategory = (id) => {
         if (window.confirm("Are you sure? This might delete associated services!")) {
-            fetch(/categories/${id}, { method: 'DELETE' })
+            fetch(`/categories/${id}`, { method: 'DELETE' })
                 .then(r => {
                     if (r.ok) setCategories(categories.filter(c => c.id !== id));
                 });
@@ -45,7 +45,7 @@ function AdminDashboard() {
      */
     const handleDeleteService = (id) => {
         if (window.confirm("Are you sure?")) {
-            fetch(/services/${id}, { method: 'DELETE' })
+            fetch(`/services/${id}`, { method: 'DELETE' })
                 .then(r => {
                     if (r.ok) setServices(services.filter(s => s.id !== id));
                 });
@@ -56,7 +56,7 @@ function AdminDashboard() {
      * Updates the status of a booking.
      */
     const handleUpdateStatus = (id, newStatus) => {
-        fetch(/bookings/${id}, {
+        fetch(`/bookings/${id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ status: newStatus })
@@ -183,7 +183,7 @@ function AdminDashboard() {
                                         <span className="badge">{svc.category ? svc.category.name : 'Uncategorized'}</span>
                                     </td>
                                     <td>
-                                        <Link to={/admin/services/${svc.id}/edit} className="action-btn edit">Edit</Link>
+                                        <Link to={`/admin/services/${svc.id}/edit`} className="action-btn edit">Edit</Link>
                                         <button onClick={() => handleDeleteService(svc.id)} className="action-btn delete">Delete</button>
                                     </td>
                                 </tr>
@@ -221,7 +221,7 @@ function AdminDashboard() {
                                         <div style={{ fontWeight: 500 }}>{cat.name}</div>
                                     </td>
                                     <td>
-                                        <Link to={/admin/categories/${cat.id}/edit} className="action-btn edit">Edit</Link>
+                                        <Link to={`/admin/categories/${cat.id}/edit`} className="action-btn edit">Edit</Link>
                                         <button onClick={() => handleDeleteCategory(cat.id)} className="action-btn delete">Delete</button>
                                     </td>
                                 </tr>
